@@ -101,9 +101,9 @@ for j in range(0, len(listemails)):
        s[listemails[j]]=vpe
      else: #Caso falte algum centavo, será acrescentado ao(s) último(s) valor(es) do dicionário.
           if(j==(qtdemails-verif)): #Verificação do/dos últimos elemento da lista
-              verif -= 1 #Diminui o valor acrescido do verificador
-               s[listemails[j]]=vpe+1 #Acréscimo do valor de verificação (1)
-           else: #Caso não seja o último, ele segue até chegar a ele e acrescenta o valor 
+                verif -= 1 #Diminui o valor acrescido do verificador
+                s[listemails[j]]=vpe+1 #Acréscimo do valor de verificação (1)
+           else: #Enquanto não chega ao último(s), ele segue até chegar a ele(s) e acrescenta o valor 
                 s[listemails[j]]=vpe
  return s #retorna o dicionário gerado pela função
 ```
