@@ -137,7 +137,7 @@ Ao execultar esse código, teremos esse dicionário gerado como resultado:
 {'fulano@hotmail.com': 3333,
  'lindo123@yahoo.com': 3333,
  'zequinha@gmail.com': 3334}
-´´´
+```
 
 ## Por hoje é só, pessoal
 Gostaria de deixar meus sinceros agradecimentos pela oportunidade de realizar esse desafio. Tenho plena convicção de que me tornei alguém melhor depois de ter vivênciado tudo isso. Foi de grande aprendizado para mim e para minha carreira como Dev. Muito obrigado de verdade, Stone. Espero poder fazer parte da equipe de Devs de vocês, forte abraço.
