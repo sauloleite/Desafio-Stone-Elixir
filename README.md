@@ -5,7 +5,7 @@ Segue aqui, também, o guia de como melhor implementar o código.
 
 ## Como a solução foi alcançada
 
-Foi desenvolvida uma função que recebe dois parâmetros e posteriormente trata esses dados e retorna um dicionário, conforme foi exigido no desafio. Como o desafio não especififou Alguns prováveis erros de operação foram previstos e solucionados, como por exemplo, caso fosse recebido uma lista com emails duplicados, além da verificação de emails inválidos. Verificação do mesmo cumprimento da lista de "Quantidade de cada item" e "Preço por unidade/peso/pacote de cada item", para possíveis reajustes. Na exigência de não faltar nenhum centavo, houve um caso a ser avaliado de distribuição do que faltava. Entre outros problemas que foram solucionados e serão melhor explicados no decorrer da descrição.
+Foi desenvolvida uma função que recebe dois parâmetros e posteriormente trata esses dados e retorna um dicionário, conforme foi exigido no desafio. Como o desafio não especificou número máximo de linhas, foi desenvolvida uma função que detecta e trata alguns prováveis erros de operação. Por exemplo, caso fosse recebido uma lista com emails duplicados, além da verificação de emails inválidos. Verificação do mesmo cumprimento da lista de "Quantidade de cada item" e "Preço por unidade/peso/pacote de cada item", para possíveis reajustes. Na exigência de não faltar nenhum centavo, houve um caso a ser avaliado de redistribuição dos centavos faltantes não somente no último valor, mas nos últimos, em caso de dízimas maiores. Entre outros problemas que foram solucionados e serão melhor explicados no decorrer da descrição.
 
 ## Criando a função
 
