@@ -107,8 +107,8 @@ for j in range(0, len(listemails)):
                 s[listemails[j]]=vpe
  return s #retorna o dicionário gerado pela função
 ```
-## Caso da dízima ,6666...
-Como exigência do Desafio é importante que não falte nenhum centavo. No guia é descrito o caso de uma dízima de ",333..", mas não é proposto de outras possíveis dízimas. Uma delas é a ",6666...". Neste caso, para que não faltasse nenhum centavo, foi preciso realizar uma distribuição dos centavos faltantes para os últimos valores dos emails. Isso se dá por meio da condição já mostrada acima, onde é feita a verificação de se há centavos faltantes e, enquanto houver, estes centavos serão acrescidos aos últimos valores do dicionário. Conforme o resultado obtido abaixo: 
+## Caso da outras dízimas
+Como exigência do Desafio é importante que não falte nenhum centavo. No guia é descrito o caso de uma dízima de ",333..", mas não é proposto de outras possíveis dízimas. Uma delas é a ",6666...". Neste caso, para que não faltasse nenhum centavo, foi preciso realizar uma distribuição dos centavos faltantes para os últimos valores dos emails. Isso se dá por meio da condição já mostrada acima, onde é feita a verificação de se há centavos faltantes e, enquanto houver, estes centavos serão acrescidos aos últimos valores do dicionário. **Quanto maior for a dízima, mais centavos serão redistribuídos para os valores finais, para garantir que não somente o último fique com os centavos faltantes**. Conforme o resultado obtido abaixo: 
 ```python
 {'fulano@hotmail.com': 1101,
  'ciclano@yahoo.com': 1102,
