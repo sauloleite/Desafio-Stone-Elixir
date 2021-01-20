@@ -5,7 +5,7 @@ Segue aqui, também, o guia de como melhor implementar o código.
 
 ## Como a solução foi alcançada
 
-Foi desenvolvida uma função que recebe dois parâmetros e posteriormente trata esses dados e retorna um dicionário, conforme foi exigido no desafio. Alguns prováveis erros de operação foram previstos e solucionados, como por exemplo, caso fosse recebido uma lista com emails duplicados, além da verificação de emails inválidos. Verificação do mesmo cumprimento da lista de "Quantidade de cada item" e "Preço por unidade/peso/pacote de cada item", para possíveis reajustes. Na exigência de não faltar nenhum centavo, houve um caso a ser avaliado de distribuição do que faltava. Entre outros problemas que foram solucionados e serão melhor explicados no decorrer da descrição.
+Foi desenvolvida uma função que recebe dois parâmetros e posteriormente trata esses dados e retorna um dicionário, conforme foi exigido no desafio. Como o desafio não especififou Alguns prováveis erros de operação foram previstos e solucionados, como por exemplo, caso fosse recebido uma lista com emails duplicados, além da verificação de emails inválidos. Verificação do mesmo cumprimento da lista de "Quantidade de cada item" e "Preço por unidade/peso/pacote de cada item", para possíveis reajustes. Na exigência de não faltar nenhum centavo, houve um caso a ser avaliado de distribuição do que faltava. Entre outros problemas que foram solucionados e serão melhor explicados no decorrer da descrição.
 
 ## Criando a função
 
@@ -99,7 +99,7 @@ verif = somaitens - vpe*qtdemails #Verificador de "falta" para possível redistr
 for j in range(0, len(listemails)): 
     if(verif == 0): #Condição para verificar se não faltará nenhum centavo
        s[listemails[j]]=vpe
-     else: #Caso falte algum centavo, será acrescentado ao último valor do dicionário.
+     else: #Caso falte algum centavo, será acrescentado ao(s) último(s) valor(es) do dicionário.
           if(j==(qtdemails-verif)): #Verificação do/dos últimos elemento da lista
               verif -= 1 #Diminui o valor acrescido do verificador
                s[listemails[j]]=vpe+1 #Acréscimo do valor de verificação (1)
@@ -108,7 +108,7 @@ for j in range(0, len(listemails)):
  return s #retorna o dicionário gerado pela função
 ```
 ## Caso da outras dízimas
-Como exigência do Desafio é importante que não falte nenhum centavo. No guia é descrito o caso de uma dízima de ",333..", mas não é proposto de outras possíveis dízimas. Uma delas é a ",6666...". Neste caso, para que não faltasse nenhum centavo, foi preciso realizar uma distribuição dos centavos faltantes para os últimos valores dos emails. Isso se dá por meio da condição já mostrada acima, onde é feita a verificação de se há centavos faltantes e, enquanto houver, estes centavos serão acrescidos aos últimos valores do dicionário. **Quanto maior for a dízima, mais centavos serão redistribuídos para os valores finais, para garantir que não somente o último fique com os centavos faltantes**. Conforme o resultado obtido abaixo: 
+Como exigência do Desafio é importante que não falte nenhum centavo. No guia é descrito o caso de uma dízima de ",333..", mas não é proposto de outras possíveis dízimas. Uma delas é a ",6666...". Neste caso, para que não faltasse nenhum centavo, foi preciso realizar uma distribuição dos centavos faltantes para os últimos valores dos emails. Isso se dá por meio da condição já mostrada acima, onde é feita a verificação de se há centavos faltantes e, enquanto houver, estes centavos serão acrescidos aos últimos valores do dicionário. **Quanto maior for a dízima, mais centavos serão redistribuídos para os valores finais, para garantir que não somente o último fique com os centavos faltantes e que não falte nenhum centavo**. Conforme o resultado obtido abaixo: 
 ```python
 {'fulano@hotmail.com': 1101,
  'ciclano@yahoo.com': 1102,
