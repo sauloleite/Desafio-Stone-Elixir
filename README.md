@@ -25,7 +25,7 @@ Este verificador inicial avalia se a lista de compras contém três itens/listas
 ```python
 if(len(listcomps) == 3): #Verificador se a lista contém pelo menos 3 itens/listas
     #Continua...
- else:
+else:
     print("A lista de compras deve conter 3 itens/listas.")
 ```
 
