@@ -1,7 +1,7 @@
 # Desafio Stone Elixir | Saulo Leite
 
 Essa é a descrição do código desenvolvido, na linguagem Python, para o Teste Técnico, para o Programa de Formação em Elixir da Stone.
-Segue aqui, também, o guia de como melhor implementar o código.
+Segue aqui, também, a lógica usada para resolver o desafio e o guia de como melhor implementar o código.
 
 ## Como a solução foi alcançada
 
@@ -23,6 +23,7 @@ def func(listcomps, listemails): #"listcomps" é a lista de compras e "listemail
 Este verificador inicial avalia se a lista de compras contém três itens/listas. Nas instruções do desafio é descrito que serão recebidas duas listas e que a lista de compras contará com três listas, não serão enviados valores nulos, mas que poderiam ser enviadas listas vazias. Nesse caso, a função espera que a lista de compras contenha três listas/itens, mesmo que sejam possíveis listas vazias. Caso a lista contenha menos que três itens/listas, ela não irá realizar os outros procedimento e imprimirá uma mensagem dizendo que são necessários três itens/listas na lista. Isso se faz necessário para que não haja erros na realização dos cálculos das somas dos valores, além de que não sejam mostradas mensagens de erros para o usuário, caso ocorra um equívoco. Vejamos o código: 
 
 ```python
+#Verficador de tamanho das listas "Quantidade de cada item" e "Preço por unidade/peso/pacote de cada item"
 if(len(listcomps) == 3): #Verificador se a lista contém pelo menos 3 itens/listas
     #Continua...
 else:
@@ -31,19 +32,19 @@ else:
 
 ## Verificador das listas de quantidade de itens e preços
 
-Após verificar se a lista de compras possui três itens/listas, é realizada a verificação do comprimento da lista de "quantidade de cada item" e a de "Preço por unidade/peso/pacote de cada item". Caso haja alguma incoformidade, por exemplo, a comprimento da lista de quantidade é maior que a de preços, é acrescido itens a lista com o valor zero, até que o comprimento das listas seja igual. Como o valor acrescido em listas com o comprimento menor é zero, não há alteração no resultado obitido com os cálculos que serão realizados. Essa ação só é essencial para que não interfira no processo de multiplicação realizado posteriormente (será melhor explicado depois). Sabemos que não vivemos em um mundo perfeito e um usuário pode enviar uma lista de preços maior que a de quantidade de itens e vice-versa. Vejamos a parte do código que implementa isso:
+Após verificar se a lista de compras possui três itens/listas, é realizada a verificação do comprimento da lista de "quantidade de cada item" e a de "Preço por unidade/peso/pacote de cada item". Caso haja alguma incoformidade, por exemplo, a comprimento da lista de quantidade é maior que a de preços, é acrescido itens a lista com o valor zero, até que o comprimento das listas seja igual. Como o valor acrescido em listas com o comprimento menor é zero, não há alteração no resultado obitido com os cálculos que serão realizados. Essa ação só é essencial para que não interfira no processo de multiplicação realizado posteriormente (será melhor explicado depois). Sabemos que não vivemos em um mundo perfeito e um usuário poderá acidentalmente enviar uma lista de preços maior que a de quantidade de itens e vice-versa. Vejamos a parte do código que implementa isso:
 
 ```python
 #Verficador de tamanho das listas "Quantidade de cada item" e "Preço por unidade/peso/pacote de cada item"
-if(len(listcomps[1])!=len(listcomps[2])):
-    if(len(listcomps[1]) < len(listcomps[2])):
-        medida = len(listcomps[2]) - len(listcomps[1])
-        for i in range(0, medida):
-        listcomps[1].append(0)
-     else:
-        medida = len(listcomps[1]) - len(listcomps[2])
-        for i in range(0, medida):
-            listcomps[2].append(0)
+if(len(listcomps[1])!=len(listcomps[2])): #Verifica se o comprimento da lista é diferente
+    if(len(listcomps[1]) < len(listcomps[2])): #Caso a lista de itens seja maior, a lista de preço será ajustada
+        medida = len(listcomps[2]) - len(listcomps[1]) #Esta variável será usada para fazer o ajuste
+        for i in range(0, medida): #Laço de repetição para ajustar a lista de itens
+            listcomps[1].append(0) #Serão acrescentados a zeros até que as listas tenham o mesmo comprimento
+    else: #Caso a lista de preço seja maior, a lista de itens será ajustada
+        medida = len(listcomps[1]) - len(listcomps[2]) #Variável de ajuste
+        for i in range(0, medida): #Laço de repetição para ajustar a lista de preços
+            listcomps[2].append(0) #Serão acrescentados a zeros até que as listas tenham o mesmo comprimento
 ```
 
 ## Verificador de emails inválidos
@@ -107,7 +108,7 @@ for j in range(0, len(listemails)):
  return s #retorna o dicionário gerado pela função
 ```
 ## Caso da outras dízimas
-Como exigência do Desafio é importante que não falte nenhum centavo. No guia é descrito o caso de uma dízima de ",333...", mas não é proposto o caso de outras possíveis dízimas. Uma delas é a ",6666...". Neste caso, para que não faltasse nenhum centavo, foi preciso realizar uma distribuição dos centavos faltantes para os últimos valores dos emails. Isso se dá por meio da condição já mostrada acima, onde é feita a verificação de se há centavos faltantes e, enquanto houver, estes centavos serão acrescidos aos últimos valores do dicionário. **Quanto maior for a dízima, mais centavos serão redistribuídos para os valores finais, para garantir que não somente o último fique com os centavos faltantes e que não falte nenhum centavo**. Conforme o resultados obtidos abaixo: 
+Como exigência do Desafio é importante que não falte nenhum centavo. No guia é descrito o caso de uma dízima de ",333...", mas não é proposto o caso de outras possíveis dízimas. Uma delas é a ",6666...". Neste caso, para que não faltasse nenhum centavo, foi preciso realizar uma distribuição dos centavos faltantes para os últimos valores dos emails. Isso se dá por meio da condição já mostrada acima, onde é feita a verificação se há centavos faltantes e, enquanto houver, estes centavos serão acrescidos aos últimos valores do dicionário. **Quanto maior for a dízima, mais centavos serão redistribuídos para os valores finais, para garantir que não somente o último fique com os centavos faltantes e que não falte nenhum centavo**. Conforme o resultados obtidos abaixo: 
 ```python
 #Exemplo com 3 emails com a dízima de 0,6666...
 {'fulano@hotmail.com': 1101,
@@ -124,10 +125,10 @@ Neste caso de dízimas maiores, não necessariamente sempre serão os dois últi
  'fulano@hotmail.com': 141,
  'stevejobs@icloud.com': 141}
  ```
- A maior dízima possível é a de "0,999...". No caso mostrado abaixo, de nove emails, os centavos faltantes são redistribuídos para os próximos emails posteriores ao primeiro. No entanto, em outros casos, **sempre os valores mais próximos dos últimos receberão os centavos faltantes, até que não falte nenhum centavo**. Em suma, como a maior dízima possível é de "0,999...", não haverá casos de redistribuição de centavos faltantes para além dos oito emails finais. 
+A maior dízima possível é a de "0,999...". No caso mostrado abaixo, de nove emails, os centavos faltantes são redistribuídos para os próximos emails posteriores ao primeiro. No entanto, em outros casos, **sempre os valores mais próximos dos últimos receberão os centavos faltantes, até que não falte nenhum centavo**. Em suma, como a maior dízima possível é de "0,999...", não haverá casos de redistribuição de centavos faltantes para além dos oito emails finais. 
  
  ```python
-#Exemplo com dízima de 0,999... (A maior possível)
+#Exemplo com a dízima de 0,999... (A maior possível)
 {'beltrano@outlook.com': 88,
  'billgates@microsoft.com': 89,
  'cilano@uol.com': 89,
