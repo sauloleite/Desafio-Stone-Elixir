@@ -128,7 +128,7 @@ Neste caso de dízimas maiores, não necessariamente sempre serão os dois últi
 A maior dízima possível é a de "0,999...". No caso mostrado abaixo, de nove emails, os centavos faltantes são redistribuídos para os próximos emails posteriores ao primeiro. No entanto, em outros casos, **sempre os valores mais próximos dos últimos receberão os centavos faltantes, até que não falte nenhum centavo**. Em suma, como a maior dízima possível é de "0,999...", não haverá casos de redistribuição de centavos faltantes para além dos oito emails finais. 
  
  ```python
-#Exemplo com dízima de 0,999... (A maior possível)
+#Exemplo com a dízima de 0,999... (A maior possível)
 {'beltrano@outlook.com': 88,
  'billgates@microsoft.com': 89,
  'cilano@uol.com': 89,
