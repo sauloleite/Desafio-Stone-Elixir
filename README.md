@@ -1,11 +1,11 @@
 # Desafio Stone Elixir | Saulo Leite
 
-Essa é a descrição do código desenvolvido na linguagem Python para o Teste Técnico para o Programa de Formação em Elixir.
+Essa é a descrição do código desenvolvido, na linguagem Python, para o Teste Técnico, para o Programa de Formação em Elixir da Stone.
 Segue aqui, também, o guia de como melhor implementar o código.
 
 ## Como a solução foi alcançada
 
-Foi desenvolvida uma função que recebe dois parâmetros e posteriormente trata esses dados e retorna um dicionário, conforme foi exigido no desafio. Como o desafio não especificou número máximo de linhas, foi desenvolvida uma função que detecta e trata alguns prováveis erros de operação. Por exemplo, caso fosse recebido uma lista com emails duplicados, além da verificação de emails inválidos. Verificação do mesmo cumprimento da lista de "Quantidade de cada item" e "Preço por unidade/peso/pacote de cada item", para possíveis reajustes. Na exigência de não faltar nenhum centavo, houve um caso a ser avaliado de redistribuição dos centavos faltantes não somente no último valor, mas nos últimos, em caso de dízimas maiores. Entre outros problemas que foram solucionados e serão melhor explicados no decorrer da descrição.
+Foi desenvolvida uma função que recebe dois parâmetros e posteriormente trata esses dados e retorna um dicionário, conforme foi exigido no desafio. Como o desafio não especificou número máximo de linhas, o código foi desenvolvido de modo que, ao ser implementado, detecta e trata alguns prováveis erros de operação. Por exemplo, caso fosse recebido uma lista com emails duplicados, além da verificação de emails inválidos. Verificação do mesmo cumprimento da lista de "Quantidade de cada item" e "Preço por unidade/peso/pacote de cada item", para possíveis reajustes. Na exigência de não faltar nenhum centavo, houve um caso a ser avaliado de redistribuição dos centavos faltantes não somente no último valor, mas nos últimos, em caso de dízimas maiores. Entre outros problemas que foram solucionados e serão melhor explicados no decorrer da descrição.
 
 ## Criando a função
 
@@ -14,7 +14,7 @@ A função criada se chama "func". Depois de receber os dois parâmetros, sendo 
 #Função que irá receber uma lista de compras e uma lista de e-mails. 
 def func(listcomps, listemails): #"listcomps" é a lista de compras e "listemails" a de emails
     s = dict() #Criando dicionário da saída de dados
-    listemails = sorted(set(list(filter(None,listemails)))) #Ordenando e eliminando emails repeditos e vazios
+    listemails = sorted(set(list(filter(None,listemails)))) #Ordenando e eliminando emails repeditos e itens vazios
 #Continua...
 ```
 
@@ -31,7 +31,7 @@ else:
 
 ## Verificador das listas de quantidade de itens e preços
 
-Após verificar se a lista de compras possui três itens/listas, é realizada a verificação do comprimento da lista de "quantidade de cada item" e a de "Preço por unidade/peso/pacote de cada item". Caso haja alguma incoformidade, por exemplo, a comprimento da lista de quantidade é mair que a de preços, é acrescido itens a lista com o valor zero, até que o comprimento das listas seja igual. Como o valor acrescido em listas com o comprimento menor é zero, não interfere no cálculo do resultado. Isto só é essencial para que não interfira no processo de multiplicação realizado posteriormente (será melhor explicado depois). Sabemos que não vivemos em um mundo perfeito e um usuário pode enviar uma lista de preços maior que a de quantidade de itens e virse-versa. Vejamos a parte do código que implementa isso:
+Após verificar se a lista de compras possui três itens/listas, é realizada a verificação do comprimento da lista de "quantidade de cada item" e a de "Preço por unidade/peso/pacote de cada item". Caso haja alguma incoformidade, por exemplo, a comprimento da lista de quantidade é mair que a de preços, é acrescido itens a lista com o valor zero, até que o comprimento das listas seja igual. Como o valor acrescido em listas com o comprimento menor é zero, não interfere no cálculo do resultado. Isto só é essencial para que não interfira no processo de multiplicação realizado posteriormente (será melhor explicado depois). Sabemos que não vivemos em um mundo perfeito e um usuário pode enviar uma lista de preços maior que a de quantidade de itens e vice-versa. Vejamos a parte do código que implementa isso:
 
 ```python
 #Verficador de tamanho das listas "Quantidade de cada item" e "Preço por unidade/peso/pacote de cada item"
