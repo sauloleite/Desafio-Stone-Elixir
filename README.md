@@ -5,46 +5,32 @@ Segue aqui, também, a lógica usada para resolver o desafio e o guia de como me
 
 ## Como a solução foi alcançada
 
-Foi desenvolvida uma função que recebe dois parâmetros e posteriormente trata esses dados e retorna um dicionário, conforme foi exigido no desafio. Como o desafio não especificou número máximo de linhas, o código foi desenvolvido de modo que, ao ser implementado, detecta e trata alguns prováveis erros de operação. Por exemplo, caso fosse recebido uma lista com emails duplicados, além da verificação de emails inválidos. Verificação do mesmo cumprimento da lista de "Quantidade de cada item" e "Preço por unidade/peso/pacote de cada item", para possíveis reajustes. Na exigência de não faltar nenhum centavo, houve um caso a ser avaliado de redistribuição dos centavos faltantes não somente no último valor, mas nos últimos, em caso de dízimas maiores. Entre outros problemas que foram solucionados e serão melhor explicados no decorrer da descrição.
+Foi desenvolvida uma função que recebe dois parâmetros e posteriormente trata esses dados e retorna um dicionário, conforme foi exigido no desafio. Como o desafio não especificou número máximo de linhas, o código foi desenvolvido de modo que, ao ser implementado, detecta e trata alguns prováveis erros de operação. Por exemplo, caso fosse recebido uma lista com emails duplicados, além da verificação de emails inválidos. Verificação do mesmo cumprimento dos itens/listas da lista de compras, para possíveis reajustes. Na exigência de não faltar nenhum centavo, houve um caso a ser avaliado de redistribuição dos centavos faltantes não somente no último valor, mas nos últimos, em caso de dízimas maiores. Entre outros problemas que foram solucionados e serão melhor explicados no decorrer da descrição.
 
 ## Criando a função
 
-A função criada se chama "func". Depois de receber os dois parâmetros, sendo esses as listas de compras e de email, é criado um dicionário para a saída dos dados desejados. Posteriormente, é realizado o tratamento dos dados recebidos da lista de emails. Esses dados são ordenados alfabeticamente, além de eliminar possíveis itens vazios e emails duplicados, conforme mostra o código abaixo:
+A função criada se chama "func". Depois de receber os dois parâmetros, sendo esses as listas de compras e de emails, é criado um dicionário para a saída dos dados desejados. Posteriormente, é realizado o tratamento dos dados recebidos da lista de emails. Esses dados são ordenados alfabeticamente, além de eliminar possíveis itens vazios e emails duplicados, conforme mostra o código abaixo:
 ```python
 #Função que irá receber uma lista de compras e uma lista de e-mails. 
 def func(listcomps, listemails): #"listcomps" é a lista de compras e "listemails" a de emails
     s = dict() #Criando dicionário da saída de dados
+    #Tratando dados recebidos
     listemails = sorted(set(list(filter(None,listemails)))) #Ordenando e eliminando emails repeditos e itens vazios
 #Continua...
 ```
 
 ## Verificador inicial
 
-Este verificador inicial avalia se a lista de compras contém três itens/listas. Nas instruções do desafio é descrito que serão recebidas duas listas e que a lista de compras contará com três listas, não serão enviados valores nulos, mas que poderiam ser enviadas listas vazias. Nesse caso, a função espera que a lista de compras contenha três listas/itens, mesmo que sejam possíveis listas vazias. Caso a lista contenha menos que três itens/listas, ela não irá realizar os outros procedimento e imprimirá uma mensagem dizendo que são necessários três itens/listas na lista. Isso se faz necessário para que não haja erros na realização dos cálculos das somas dos valores, além de que não sejam mostradas mensagens de erros para o usuário, caso ocorra um equívoco. Vejamos o código: 
+Este verificador inicial avalia se a lista de compras contém itens com listas com três itens. Em um comentário de uma dúvida de um candidato, o criador do Desafio (Victor Oliveira) respondeu que: "cada item na lista deve ter: **nome: string(); quantidade: inteiro"; preco ou preco_unitario: inteiro**". Desse modo, a "listcomps" (lista de compras) espera receber itens/listas neste formato: ['Item'(str), Quantidade(int), Preço(int)].  Nesse caso, a função espera que a lista de compras contenha listas com três itens. Em outro comentário foi dito pelo Victor que os valores de "Quantidade" e "Preço" sempre serão inteiros. Assim sendo, caso o item/lista possua um comprimento menor ou maior que 3, este item será removido da lista, pois não está em conformidade com o item esperado. Este procedimento é necessário para não atrapalhar nos cálculos que serão melhor explicados posteriormente. Sabemos que não vivemos em um mundo perfeito e um usuário poderá acidentalmente enviar a lista de compras contendo listas vazias e com tamanhos irregulares. Vejamos o código: 
 
 ```python
-#Verficador de tamanho das listas "Quantidade de cada item" e "Preço por unidade/peso/pacote de cada item"
-if(len(listcomps) == 3): #Verificador se a lista contém pelo menos 3 itens/listas
-    #Continua...
-else:
-    print("A lista de compras deve conter 3 itens/listas.")
-```
-
-## Verificador das listas de quantidade de itens e preços
-
-Após verificar se a lista de compras possui três itens/listas, é realizada a verificação do comprimento da lista de "quantidade de cada item" e a de "Preço por unidade/peso/pacote de cada item". Caso haja alguma incoformidade, por exemplo, a comprimento da lista de quantidade é maior que a de preços, é acrescido itens a lista com o valor zero, até que o comprimento das listas seja igual. Como o valor acrescido em listas com o comprimento menor é zero, não há alteração no resultado obitido com os cálculos que serão realizados. Essa ação só é essencial para que não interfira no processo de multiplicação realizado posteriormente (será melhor explicado depois). Sabemos que não vivemos em um mundo perfeito e um usuário poderá acidentalmente enviar uma lista de preços maior que a de quantidade de itens e vice-versa. Vejamos a parte do código que implementa isso:
-
-```python
-#Verficador de tamanho das listas "Quantidade de cada item" e "Preço por unidade/peso/pacote de cada item"
-if(len(listcomps[1])!=len(listcomps[2])): #Verifica se o comprimento da lista é diferente
-    if(len(listcomps[1]) < len(listcomps[2])): #Caso a lista de itens seja maior, a lista de preço será ajustada
-        medida = len(listcomps[2]) - len(listcomps[1]) #Esta variável será usada para fazer o ajuste
-        for i in range(0, medida): #Laço de repetição para ajustar a lista de itens
-            listcomps[1].append(0) #Serão acrescentados a zeros até que as listas tenham o mesmo comprimento
-    else: #Caso a lista de preço seja maior, a lista de itens será ajustada
-        medida = len(listcomps[1]) - len(listcomps[2]) #Variável de ajuste
-        for i in range(0, medida): #Laço de repetição para ajustar a lista de preços
-            listcomps[2].append(0) #Serão acrescentados a zeros até que as listas tenham o mesmo comprimento
+#Considerando que a lista de compras terá itens com listas neste formato ['Item', Quantidade, Preço], será realizada uma verificação se todos os itens estão em conformidade
+invalidos = [] #Variável criada para armazenar itens inválidos
+for i in range(len(listcomps)): #Varretura de itens inválidos na lista 
+    if len(listcomps[i])<3 or len(listcomps[i])>3: #Verificar caso tenha algum item com uma lista maior ou menor que 3 
+        invalidos.append(listcomps[i]) #Armazena este valor na lista "inválidos"
+for i in invalidos:
+    listcomps.remove(i) #Removendo itens considerados inválidos
 ```
 
 ## Verificador de emails inválidos
@@ -53,7 +39,7 @@ Antes de realizar os cálculos, são verificados possíveis emails inválidos, j
 ```python
 #Verificador de emails inválidos
 emailserro = [] #Criando lista de emails inválidos p/ removê-los posteriormente
-for i in range(0, len(listemails)): 
+for i in range(len(listemails)): 
     if((len(listemails[i]) < 3 or len(listemails[i]) > 254)): #Verifica se é um email válido
         emailserro.append(listemails[i]) #Adicionando estes emails a lista de emails inválidos
     elif(not(listemails[i].count('@'))): #Verifica se é um email válido
@@ -63,24 +49,23 @@ for i in emailserro:
 ```
 
 ## Calcular a soma dos valores
-A soma dos valores se dá por meio da forma que é exigida no Desafio. É multiplicado o preço de cada item por sua quantidade e somado todos os itens, posteriormente, é armazenado em uma variável. Isso se dá por meio de um laço de repetição "for", que varre todos os itens das listas. Como é selecionado o item de uma lista dentro de uma lista, por esse motivo se faz necessário a verificação se a lista de compras tem três itens/listas, pois os procedimentos aqui realizados contam com isso. Vejamos como fica o código:
+A soma dos valores se dá por meio da forma que é exigida no Desafio. É multiplicado o preço de cada item por sua quantidade e somado todos os itens, posteriormente, é armazenado em uma variável. Isso se dá por meio de um laço de repetição "for", que varre todos os itens das listas. Como é selecionado o item de uma lista dentro de uma lista, por esse motivo se faz necessário a verificação se a lista de compras tem itens/listas com o comprimento de três itens, pois os procedimentos aqui realizados contam com isso. Vejamos como fica o código:
 
 ```python
 #Calcular a soma dos valores, multiplicar o preço de cada item por sua quantidade e somar todos os itens
 somaitens = 0 #Variável criada para armazenar o valor da soma dos itens * preços
-for i in range(0, len(listcomps[1])): 
-    somaitens = listcomps[1][i]*listcomps[2][i] + somaitens #Soma de itens
+for i in range(len(listcomps[1])): 
+    somaitens = listcomps[i][1]*listcomps[i][2] + somaitens #Soma de itens
 ```
 
 ## Ajustes para evitar uma divisão por zero
-Este ajuste é inevitável, pois sem ele, caso a lista de emails recebida esteja vazia, ocorreria uma erro, já que não é possível fazer divisão por zero. Desse modo, a melhor solução foi verificar o comprimento da lista de emails e se ela for 0, mudar para 1, para que assim não ocorra esse erro catastrófico. Além disso, é mostrada uma mensagem para o usuário do porquê de um valor retornado vazio. Haja vista que não se pode dividir uma valor igualmente para uma quantidade de "zero" emails. Conforme mostra o código:
+Este ajuste é inevitável, pois sem ele, caso a lista de emails recebida esteja vazia, ocorreria uma erro, já que não é possível fazer divisão por zero. Desse modo, a melhor solução foi verificar o comprimento da lista de emails e se ela for 0, mudar para 1, para que assim não ocorra esse erro catastrófico. Caso seja recebida uma lista com zero emails, é retornada uma saída "s" com um dicionário vazio, o usuário deve decidir como irá tratar da validação. Haja vista que não se pode dividir uma valor igualmente para uma quantidade de "zero" emails. Conforme mostra o código:
 
 ```python
 #Ajustes para evitar uma divisão por zero
 qtdemails = len(listemails) #Variável criada para evitar divisão por zero
 if(qtdemails==0): #Condição criada para evitar a possibilidade de divisão por 0
     qtdemails = 1 #Atribuindo o valor de 1 para evitar divisão por zero
-    print("Lista sem emails para realização") #Mensagem para avisar o porquê de um S "Vazio"
 ```
 
 ## Dividir o valor de forma igual entre a quantidade de e-mails
@@ -96,7 +81,7 @@ Para a realização dessa exigência no Desafio, foi criada uma variável para a
 ```python
 #Verificando se não faltará nenhum centavo
 verif = somaitens - vpe*qtdemails #Verificador de "falta" para possível redistribuição
-for j in range(0, len(listemails)): 
+for j in range(len(listemails)): 
     if(verif == 0): #Condição para verificar se não faltará nenhum centavo
        s[listemails[j]]=vpe
      else: #Caso falte algum centavo, será acrescentado ao(s) último(s) valor(es) do dicionário.
@@ -146,14 +131,16 @@ Após o término de toda construção da função, salvou-se um arquivo chamado 
 ```python
 '''Teste Desafio Stone Elixir
 Desenvolvido por: Saulo Leite'''
-
+#ATENÇÃO: o arquivo: "Desafio.py" deve estar presente na mesma pasta que esse arquivo para poder executá-lo!
 #Importando o módulo com a função pedida no desafio
 import Desafio 
 
-#Lista de compras para testes
-l1 = [['Ovos', 'Leite', 'Farinha', 'Fermento'], [12, 1, 1, 1], [150, 765, 540, 200]] 
-#Lista de emails para testes
-l2= ['zequinha@gmail.com', 'fulano@hotmail.com', 'lindo123@yahoo.com','teste', 'lindo123@yahoo.com', 'lindo123@yahoo.com','lindo123yahoo.com', 's@', 'z@', '@.', '', '´´', '..']
+#A l1 (lista de compras) foi construída da forma que recebe listas com: ['Item'(str), Quantidade(int), Preço(int)]
+
+#Lista de compras para testes com valores aletórios
+l1 =[['Ovo', 12, 100], ['Leite', 1, 650], [], ['.'], ['Teste 1'], ['Teste 2', 0] ,['Teste 3', 1,2,3,] ,['Farinha', 1, 375], ['Fermento', 1, 230], ['']]
+#Lista de emails para testes com emails aleatórios
+l2= ['stevejobs@icloud.com', 'billgates@microsoft.com', 'linustorvalds@unix.com', 'teste' , 'linustorvalds@unix.com', 'linustorvalds@unix.com','linustorvaldsunix.com', 't@', '@', '@.', ' ', '´´', '..']
 
 #Chamando a função do módulo com os dois parâmetros 
 saida = Desafio.func(l1, l2) #"l1" é a lista de compras e "l2" é a de emails
@@ -161,10 +148,10 @@ print(saida)
 ```
 Ao execultar esse código, teremos esse dicionário gerado como resultado:
 ```python
-{'fulano@hotmail.com': 3333,
- 'lindo123@yahoo.com': 3333,
- 'zequinha@gmail.com': 3334}
+{'billgates@microsoft.com': 818, 
+'linustorvalds@unix.com': 818, 
+'stevejobs@icloud.com': 819}
 ```
 
-## Por hoje é só, pessoal
+## Agradecimentos finais
 Gostaria de deixar meus sinceros agradecimentos pela oportunidade de realizar esse desafio. Tenho plena convicção de que me tornei alguém melhor depois de ter vivenciado tudo isso. Foi de grande aprendizado para mim e para minha carreira como Dev. Muito obrigado de verdade, Stone. Espero poder fazer parte da equipe de Devs de vocês, forte abraço.
