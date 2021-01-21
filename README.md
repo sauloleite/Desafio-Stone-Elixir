@@ -31,7 +31,7 @@ else:
 
 ## Verificador das listas de quantidade de itens e preços
 
-Após verificar se a lista de compras possui três itens/listas, é realizada a verificação do comprimento da lista de "quantidade de cada item" e a de "Preço por unidade/peso/pacote de cada item". Caso haja alguma incoformidade, por exemplo, a comprimento da lista de quantidade é mair que a de preços, é acrescido itens a lista com o valor zero, até que o comprimento das listas seja igual. Como o valor acrescido em listas com o comprimento menor é zero, não interfere no cálculo do resultado. Isto só é essencial para que não interfira no processo de multiplicação realizado posteriormente (será melhor explicado depois). Sabemos que não vivemos em um mundo perfeito e um usuário pode enviar uma lista de preços maior que a de quantidade de itens e vice-versa. Vejamos a parte do código que implementa isso:
+Após verificar se a lista de compras possui três itens/listas, é realizada a verificação do comprimento da lista de "quantidade de cada item" e a de "Preço por unidade/peso/pacote de cada item". Caso haja alguma incoformidade, por exemplo, a comprimento da lista de quantidade é maior que a de preços, é acrescido itens a lista com o valor zero, até que o comprimento das listas seja igual. Como o valor acrescido em listas com o comprimento menor é zero, não há alteração no resultado obitido com os cálculos que serão realizados. Essa ação só é essencial para que não interfira no processo de multiplicação realizado posteriormente (será melhor explicado depois). Sabemos que não vivemos em um mundo perfeito e um usuário pode enviar uma lista de preços maior que a de quantidade de itens e vice-versa. Vejamos a parte do código que implementa isso:
 
 ```python
 #Verficador de tamanho das listas "Quantidade de cada item" e "Preço por unidade/peso/pacote de cada item"
@@ -39,7 +39,7 @@ if(len(listcomps[1])!=len(listcomps[2])):
     if(len(listcomps[1]) < len(listcomps[2])):
         medida = len(listcomps[2]) - len(listcomps[1])
         for i in range(0, medida):
-          listcomps[1].append(0)
+        listcomps[1].append(0)
      else:
         medida = len(listcomps[1]) - len(listcomps[2])
         for i in range(0, medida):
@@ -47,8 +47,7 @@ if(len(listcomps[1])!=len(listcomps[2])):
 ```
 
 ## Verificador de emails inválidos
-
-Antes de realizar os cálculos, são verificados possíveis emails inválidos, já que a função irá trabalhar com estes endereços de correio eletrônicos. Segundo a ITEF (Internet Engineering Task Force), um email válido deve possuir "@", no mínimo 3 e no máximo 254 caracteres (Fonte: https://tools.ietf.org/html/rfc5321#section-4.5.3). Como não há como saber se a lista de emails já foi avaliada e tradada, essa ação se faz necessária, para que não haja itens que não são emails na lista. Deste modo, é realizada a verificação se o email está dentro destas exigências, caso não esteja, esse é eliminado da lista de emails, conforme é mostrado no código abaixo: 
+Antes de realizar os cálculos, são verificados possíveis emails inválidos, já que a função irá trabalhar com estes endereços de correio eletrônicos. Segundo a ITEF (Internet Engineering Task Force), um email válido deve possuir "@", no mínimo 3 e no máximo 254 caracteres (Fonte: https://tools.ietf.org/html/rfc5321#section-4.5.3). Já que não há como saber se a lista de emails já foi avaliada e tradada, essa ação se faz necessária, para que não haja itens que não são emails na lista. Deste modo, é realizada a verificação se o email está dentro destas exigências. Caso não esteja, esse é eliminado da lista de emails, conforme é mostrado no código abaixo: 
 
 ```python
 #Verificador de emails inválidos
@@ -63,7 +62,7 @@ for i in emailserro:
 ```
 
 ## Calcular a soma dos valores
-A soma dos valores se dá da forma que é exigida no Desafio. É multiplicado o preço de cada item por sua quantidade e somado todos os itens, posteriormente armazenado em uma variável. Como é selecionado o item de uma lista dentro de uma lista, por esse motivo se faz necessário a verificação se a lista de compras tem três itens/listas, pois os procedimentos aqui realizados contam com isso. Vejamos como fica o código:
+A soma dos valores se dá por meio da forma que é exigida no Desafio. É multiplicado o preço de cada item por sua quantidade e somado todos os itens, posteriormente, é armazenado em uma variável. Isso se dá por meio de um laço de repetição "for", que varre todos os itens das listas. Como é selecionado o item de uma lista dentro de uma lista, por esse motivo se faz necessário a verificação se a lista de compras tem três itens/listas, pois os procedimentos aqui realizados contam com isso. Vejamos como fica o código:
 
 ```python
 #Calcular a soma dos valores, multiplicar o preço de cada item por sua quantidade e somar todos os itens
@@ -73,7 +72,7 @@ for i in range(0, len(listcomps[1])):
 ```
 
 ## Ajustes para evitar uma divisão por zero
-Este ajuste é inevitável, pois sem ele, caso a lista de emails recebida esteja vazia, ocorreria uma erro, pois não é possível fazer divisão por zero. Desse modo, a melhor solução foi verificar o comprimento da lista de emails e se ela for 0, mudar para 1, para que assim não ocorra esse erro catastrófico. Além disso, é mostrada uma mensagem para o usuário do porquê de um valor retornado vazio. Haja visto que não se pode dividir uma valor igualmente para uma quantidade de "zero" emails. Conforme mostra o código:
+Este ajuste é inevitável, pois sem ele, caso a lista de emails recebida esteja vazia, ocorreria uma erro, já que não é possível fazer divisão por zero. Desse modo, a melhor solução foi verificar o comprimento da lista de emails e se ela for 0, mudar para 1, para que assim não ocorra esse erro catastrófico. Além disso, é mostrada uma mensagem para o usuário do porquê de um valor retornado vazio. Haja vista que não se pode dividir uma valor igualmente para uma quantidade de "zero" emails. Conforme mostra o código:
 
 ```python
 #Ajustes para evitar uma divisão por zero
@@ -84,14 +83,14 @@ if(qtdemails==0): #Condição criada para evitar a possibilidade de divisão por
 ```
 
 ## Dividir o valor de forma igual entre a quantidade de e-mails
-Isso faz parte dos requisitos do desafio. É armazenado em uma variável o valor por email obtido por meio da divisão da soma dos valores pela quantidade de emails, para que posteriormente seja tratado para sanar as outras exigências. Esta é a parte do código que realiza esse cálculo:
+Isso faz parte dos requisitos do desafio. Por meio da divisão da soma dos valores pela quantidade de emails, o valor por email obtido é armazenado em uma variável, para que posteriormente possa ser tratado, para sanar as outras exigências. O valor recebe a parte inteira do resultado da divisão da "soma dos valores" sobre a "quantidade de emails". Esta é a parte do código que realiza esse cálculo:
 
 ```python
 #Dividir o valor de forma igual entre a quantidade de e-mails
 vpe = int(somaitens/qtdemails) #Valor por email
 ```
 ## Verificando se não faltará nenhum centavo
-Para a realização dessa exigência no Desafio, foi criada uma variável para a verificação dos centavos "faltantes", que se dá por meio da subtração da soma dos valores, menos o valor por email, multiplicado pela quantidade de emails. Posterirmente, dentro de um laço de repetição, é realizada a verificação de se há centavos faltantes ou não. Este laço é realizado conforme o tamanho do comprimento da lista de emails. A verificação avalia o "verificador", se ele for igual a "zero", então não há centavos faltantes, portanto só é acrescentado ao dicionário a chave e o valor. Caso o valor do verificador seja maior que "zero", ele realiza o acréscimo desses centavos faltantes aos últimos valores do dicionário. Vejamos o código:
+Para a realização dessa exigência no Desafio, foi criada uma variável para a verificação dos centavos "faltantes". Isso se dá por meio da subtração da soma dos valores, menos o valor por email, multiplicado pela quantidade de emails. Posteriormente, dentro de um laço de repetição, é realizada a verificação se há centavos faltantes ou não. Este laço é realizado conforme o tamanho do comprimento da lista de emails. A verificação avalia o "verificador", se ele for igual a "zero", então não há centavos faltantes, portanto, só é acrescentado ao dicionário a chave e o valor. Caso o valor do verificador seja maior que "zero", ele realiza o acréscimo desses centavos faltantes aos últimos valores do dicionário. Vejamos o código:
 
 ```python
 #Verificando se não faltará nenhum centavo
@@ -108,12 +107,39 @@ for j in range(0, len(listemails)):
  return s #retorna o dicionário gerado pela função
 ```
 ## Caso da outras dízimas
-Como exigência do Desafio é importante que não falte nenhum centavo. No guia é descrito o caso de uma dízima de ",333..", mas não é proposto de outras possíveis dízimas. Uma delas é a ",6666...". Neste caso, para que não faltasse nenhum centavo, foi preciso realizar uma distribuição dos centavos faltantes para os últimos valores dos emails. Isso se dá por meio da condição já mostrada acima, onde é feita a verificação de se há centavos faltantes e, enquanto houver, estes centavos serão acrescidos aos últimos valores do dicionário. **Quanto maior for a dízima, mais centavos serão redistribuídos para os valores finais, para garantir que não somente o último fique com os centavos faltantes e que não falte nenhum centavo**. Conforme o resultado obtido abaixo: 
+Como exigência do Desafio é importante que não falte nenhum centavo. No guia é descrito o caso de uma dízima de ",333...", mas não é proposto o caso de outras possíveis dízimas. Uma delas é a ",6666...". Neste caso, para que não faltasse nenhum centavo, foi preciso realizar uma distribuição dos centavos faltantes para os últimos valores dos emails. Isso se dá por meio da condição já mostrada acima, onde é feita a verificação de se há centavos faltantes e, enquanto houver, estes centavos serão acrescidos aos últimos valores do dicionário. **Quanto maior for a dízima, mais centavos serão redistribuídos para os valores finais, para garantir que não somente o último fique com os centavos faltantes e que não falte nenhum centavo**. Conforme o resultados obtidos abaixo: 
 ```python
+#Exemplo com 3 emails com a dízima de 0,6666...
 {'fulano@hotmail.com': 1101,
  'ciclano@yahoo.com': 1102,
  'beltrano@gmail.com': 1102}
 ```
+Neste caso de dízimas maiores, não necessariamente sempre serão os dois últimos valores que receberão os centavos faltantes. Há casos que outros valores mais próximos dos últimos também receberão. Como o exemplo abaixo:
+
+```python
+#Exemplo com 5 emails com a dízima de 0,6666...
+{'beltrano@outlook.com': 140,
+ 'billgates@microsoft.com': 140,
+ 'cilano@uol.com': 141,
+ 'fulano@hotmail.com': 141,
+ 'stevejobs@icloud.com': 141}
+ ```
+ A maior dízima possível é a de "0,999...". No caso mostrado abaixo, de nove emails, os centavos faltantes são redistribuídos para os próximos emails posteriores ao primeiro. No entanto, em outros casos, **sempre os valores mais próximos dos últimos receberão os centavos faltantes, até que não falte nenhum centavo**. Em suma, como a maior dízima possível é de "0,999...", não haverá casos de redistribuição de centavos faltantes para além dos oito emails finais. 
+ 
+ ```python
+#Exemplo com dízima de 0,999... (A maior possível)
+{'beltrano@outlook.com': 88,
+ 'billgates@microsoft.com': 89,
+ 'cilano@uol.com': 89,
+ 'fulano@hotmail.com': 89,
+ 'lindo123@yahoo.com': 89,
+ 'mark@facebook.com': 89,
+ 'sol@vip.com': 89,
+ 'stevejobs@icloud.com': 89,
+ 'zequinha@gmail.com': 89}
+```
+
+
 ## ⚠️Como implementar o código⚠️
 Após o término de toda construção da função, salvou-se um arquivo chamado "Desafio.py". Para implementar só basta criar um código python para testes (ou usar o já criado presente no zip) na mesma pasta onde ele está e importar o "Desafio" em forma de módulo para o código onde os testes serão realizados. A sintaxe é: "Saída = NomeDoMódulo.Função". No caso deste código, o nome do módulo é "Desafio" e o da função é "func". Não podemos esquecer de importar por meio do comando "import Desafio". Vejamos o código do arquivo "Teste.py", presente na pasta:
 ```python
@@ -140,4 +166,4 @@ Ao execultar esse código, teremos esse dicionário gerado como resultado:
 ```
 
 ## Por hoje é só, pessoal
-Gostaria de deixar meus sinceros agradecimentos pela oportunidade de realizar esse desafio. Tenho plena convicção de que me tornei alguém melhor depois de ter vivênciado tudo isso. Foi de grande aprendizado para mim e para minha carreira como Dev. Muito obrigado de verdade, Stone. Espero poder fazer parte da equipe de Devs de vocês, forte abraço.
+Gostaria de deixar meus sinceros agradecimentos pela oportunidade de realizar esse desafio. Tenho plena convicção de que me tornei alguém melhor depois de ter vivenciado tudo isso. Foi de grande aprendizado para mim e para minha carreira como Dev. Muito obrigado de verdade, Stone. Espero poder fazer parte da equipe de Devs de vocês, forte abraço.
