@@ -9,7 +9,7 @@ Foi desenvolvida uma função que recebe dois parâmetros e posteriormente trata
 
 ## Criando a função
 
-A função criada se chama "func". Depois de receber os dois parâmetros, sendo esses as listas de compras e de email, é criado um dicionário para a saída dos dados desejados. Posteriormente, é realizado o tratamento dos dados recebidos da lista de emails. Esses dados são ordenados alfabeticamente, além de eliminar possíveis itens vazios e emails duplicados, conforme mostra o código abaixo:
+A função criada se chama "func". Depois de receber os dois parâmetros, sendo esses as listas de compras e de emails, é criado um dicionário para a saída dos dados desejados. Posteriormente, é realizado o tratamento dos dados recebidos da lista de emails. Esses dados são ordenados alfabeticamente, além de eliminar possíveis itens vazios e emails duplicados, conforme mostra o código abaixo:
 ```python
 #Função que irá receber uma lista de compras e uma lista de e-mails. 
 def func(listcomps, listemails): #"listcomps" é a lista de compras e "listemails" a de emails
@@ -19,15 +19,18 @@ def func(listcomps, listemails): #"listcomps" é a lista de compras e "listemail
 #Continua...
 ```
 
-## Verificador inicial de formato de itens/listas
+## Verificador inicial
 
 Este verificador inicial avalia se a lista de compras contém itens com listas com três itens. Em um comentário de uma dúvida de um candidato, o criador do Desafio (Victor Oliveira) respondeu que: "cada item na lista deve ter: **nome: string(); quantidade: inteiro"; preco ou preco_unitario: inteiro**". Desse modo, a "listcomps" (lista de compras) espera receber itens/listas neste formato: ['Item'(str), Quantidade(int), Preço(int)].  Nesse caso, a função espera que a lista de compras contenha listas com três itens. Em outro comentário foi dito pelo Victor que os valores de "Quantidade" e "Preço" sempre serão inteiros. Assim sendo, caso o item/lista possua um comprimento menor ou maior que 3, este item será removido da lista, pois não está em conformidade com o item esperado. Este procedimento é necessário para não atrapalhar nos cálculos que serão melhor explicados posteriormente. Sabemos que não vivemos em um mundo perfeito e um usuário poderá acidentalmente enviar a lista de compras contendo listas vazias e com tamanhos irregulares. Vejamos o código: 
 
 ```python
 #Considerando que a lista de compras terá itens com listas neste formato ['Item', Quantidade, Preço], será realizada uma verificação se todos os itens estão em conformidade
-for i in listcomps: #Varretura de itens inválidos na lista 
-    if len(i)<3 or len(i)>3: #Verificar caso tenha algum item com uma lista maior ou menor que 3
-        listcomps.remove(i) #Removendo itens considerados inválidos
+invalidos = [] #Variável criada para armazenar itens inválidos
+for i in range(len(listcomps)): #Varretura de itens inválidos na lista 
+    if len(listcomps[i])<3 or len(listcomps[i])>3: #Verificar caso tenha algum item com uma lista maior ou menor que 3 
+        invalidos.append(listcomps[i]) #Armazena este valor na lista "inválidos"
+for i in invalidos:
+    listcomps.remove(i) #Removendo itens considerados inválidos
 ```
 
 ## Verificador de emails inválidos
@@ -128,11 +131,16 @@ Após o término de toda construção da função, salvou-se um arquivo chamado 
 ```python
 '''Teste Desafio Stone Elixir
 Desenvolvido por: Saulo Leite'''
+#ATENÇÃO: o arquivo: "Desafio.py" deve estar presente na mesma pasta que esse arquivo para poder executá-lo!
+#Importando o módulo com a função pedida no desafio
+import Desafio 
 
-#Lista de compras para testes
-l1 =[['Ovo', 12, 100], ['Leite', 1, 650], ['Farinha', 1, 375], ['Fermento', 1, 230], ['']]
-#Lista de emails para testes
-l2= ['stevejobs@icloud.com', 'billgates@microsoft.com', 'linustorvalds@unix.com','teste', 'linustorvalds@unix.com', 'linustorvalds@unix.com','linustorvaldsunix.com', '@', 'z@', '@.', ' ', '´´', '..']
+#A l1 (lista de compras) foi construída da forma que recebe listas com: ['Item'(str), Quantidade(int), Preço(int)]
+
+#Lista de compras para testes com valores aletórios
+l1 =[['Ovo', 12, 100], ['Leite', 1, 650], [], ['.'], ['Teste 1'], ['Teste 2', 0] ,['Teste 3', 1,2,3,] ,['Farinha', 1, 375], ['Fermento', 1, 230], ['']]
+#Lista de emails para testes com emails aleatórios
+l2= ['stevejobs@icloud.com', 'billgates@microsoft.com', 'linustorvalds@unix.com', 'teste' , 'linustorvalds@unix.com', 'linustorvalds@unix.com','linustorvaldsunix.com', 't@', '@', '@.', ' ', '´´', '..']
 
 #Chamando a função do módulo com os dois parâmetros 
 saida = Desafio.func(l1, l2) #"l1" é a lista de compras e "l2" é a de emails
@@ -145,5 +153,5 @@ Ao execultar esse código, teremos esse dicionário gerado como resultado:
 'stevejobs@icloud.com': 819}
 ```
 
-## Por hoje é só, pessoal
+## Agradecimentos finais
 Gostaria de deixar meus sinceros agradecimentos pela oportunidade de realizar esse desafio. Tenho plena convicção de que me tornei alguém melhor depois de ter vivenciado tudo isso. Foi de grande aprendizado para mim e para minha carreira como Dev. Muito obrigado de verdade, Stone. Espero poder fazer parte da equipe de Devs de vocês, forte abraço.
