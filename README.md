@@ -35,15 +35,17 @@ Após verificar se a lista de compras possui três itens/listas, é realizada a 
 
 ```python
 #Verficador de tamanho das listas "Quantidade de cada item" e "Preço por unidade/peso/pacote de cada item"
-if(len(listcomps[1])!=len(listcomps[2])):
-    if(len(listcomps[1]) < len(listcomps[2])):
-        medida = len(listcomps[2]) - len(listcomps[1])
-        for i in range(0, medida):
-        listcomps[1].append(0)
-     else:
-        medida = len(listcomps[1]) - len(listcomps[2])
-        for i in range(0, medida):
-            listcomps[2].append(0)
+if(len(listcomps) == 3): #Verificador se a lista contém pelo menos 3 itens/listas
+    #Verficador de tamanho das listas "Quantidade de cada item" e "Preço por unidade/peso/pacote de cada item"
+    if(len(listcomps[1])!=len(listcomps[2])): #Verifica se o comprimento da lista é diferente
+        if(len(listcomps[1]) < len(listcomps[2])): #Caso a lista de itens seja maior a lista de preço será ajustada
+            medida = len(listcomps[2]) - len(listcomps[1]) #Esta variável será usada para fazer o ajuste
+            for i in range(0, medida): #Laço de repetição para ajustar a lista de itens
+                listcomps[1].append(0) #Serão acrescentados a zeros até que as listas tenham o mesmo comprimento
+         else: #Caso a lista de preço seja maior a lista de itens será ajustada
+            medida = len(listcomps[1]) - len(listcomps[2]) #Variável de ajuste
+            for i in range(0, medida): #Laço de repetição para ajustar a lista de preços
+                listcomps[2].append(0) #Serão acrescentados a zeros até que as listas tenham o mesmo comprimento
 ```
 
 ## Verificador de emails inválidos
